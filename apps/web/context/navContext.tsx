@@ -60,16 +60,14 @@ export function NavContextProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     checkIsAuthUser().then((isAuthUser) => setIsAuthUser(isAuthUser));
-  }, [pathName]);
 
-  useEffect(() => {
     const activeTabName = definedTabs.find((t) =>
       pathName.includes(t.name.toLowerCase())
     );
 
     dispatch({
       type: ReducerActionType.UPDATE,
-      payload: activeTabName?.name || "/",
+      payload: activeTabName?.name || "home",
     });
   }, [pathName]);
 

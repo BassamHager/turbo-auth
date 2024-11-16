@@ -6,10 +6,15 @@ import {
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { verify } from 'argon2';
+import { AuthJwtPayload } from './types/auth-jwtPayload';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
+  ) {}
   async registerUser(createUserDto: CreateUserDto) {
     const user = await this.userService.findByEmail(createUserDto.email);
     if (user) throw new ConflictException('User already exists!');
@@ -26,5 +31,30 @@ export class AuthService {
     }
 
     return { id: user.id, name: user.name /*  role: user.role */ };
+  }
+
+  async login(userId: number, name: string) {
+    const { accessToken /* , refreshToken */ } =
+      await this.generateTokens(userId);
+    // const hash userService.updateHashedRefreshToken(userId, hashedRT);
+    return {
+      id: userId,
+      name,
+      accessToken,
+      // refreshToken,
+    };
+  }
+
+  async generateTokens(userId: number) {
+    const payload: AuthJwtPayload = { sub: userId };
+    const [accessToken /* , refreshToken */] = await Promise.all([
+      this.jwtService.signAsync(payload),
+      // this.jwtService.signAsync(payload, this.refreshTokenConfig),
+    ]);
+
+    return {
+      accessToken,
+      // refreshToken,
+    };
   }
 }

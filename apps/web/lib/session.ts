@@ -12,7 +12,7 @@ export type Session = {
     name: string;
     // role: Role;
   };
-  // accessT Token: string;
+  accessToken: string;
 };
 
 const secretKey = process.env.SESSION_SECRET_KEY!;
