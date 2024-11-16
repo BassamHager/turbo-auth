@@ -1,0 +1,7 @@
+.wrapper {
+  @apply flex items-center gap-2 ml-auto;
+
+  p {
+    @apply text-2xl m-2 p-3 text-zinc-300 capitalize;
+  }
+}
