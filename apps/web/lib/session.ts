@@ -74,7 +74,7 @@ export async function updateTokens({
     user: {
       ...payload.user,
     },
-    // accessToken,
+    accessToken,
     // refreshToken,
   };
 
