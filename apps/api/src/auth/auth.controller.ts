@@ -14,10 +14,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('signin')
   login(@Request() req) {
-    const user = req.user;
-    console.log({ user });
-    return user;
-
-    // return this.authService.login(req.user.id, req.user.name, req.user.role);
+    const { id, name } = req.user;
+    return this.authService.login(id, name);
   }
 }

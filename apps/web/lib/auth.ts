@@ -64,7 +64,6 @@ export async function signIn(
 
   if (response.ok) {
     const result = await response.json();
-    console.log({ result });
 
     // session For Authenticated User.
     await createSession({
@@ -73,7 +72,7 @@ export async function signIn(
         name: result.name,
         // role: result.role,
       },
-      // accessToken: result.accessToken,
+      accessToken: result.accessToken,
       // refreshToken: result.refreshToken,
     });
     redirect("/");
