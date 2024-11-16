@@ -16,6 +16,7 @@ const SignInForm = () => {
         {state?.message && (
           <p className="text-sm text-red-500">{state.message}</p>
         )}
+
         <div>
           <Label htmlFor="email">Email</Label>
           <Input
@@ -28,6 +29,7 @@ const SignInForm = () => {
         {state?.error?.email && (
           <p className="text-sm text-red-500">{state.error.email}</p>
         )}
+
         <div>
           <Label htmlFor="password">Password</Label>
           <Input id="password" type="password" name="password" />
@@ -35,10 +37,13 @@ const SignInForm = () => {
         {state?.error?.password && (
           <p className="text-sm text-red-500">{state.error.password}</p>
         )}
+
         <Link className="text-sm underline" href="#">
           Forgot your password?
         </Link>
+
         <SubmitButton>Sign In</SubmitButton>
+
         <div className="flex justify-between text-sm">
           <p> Don't have an account? </p>
           <Link className="text-sm underline" href="/auth/signup">
