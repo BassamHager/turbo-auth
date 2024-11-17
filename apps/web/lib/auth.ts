@@ -73,7 +73,7 @@ export async function signIn(
         // role: result.role,
       },
       accessToken: result.accessToken,
-      // refreshToken: result.refreshToken,
+      refreshToken: result.refreshToken,
     });
     redirect("/");
   } else {
